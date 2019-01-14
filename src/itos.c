@@ -1,5 +1,27 @@
 # include "../inc/ft_printf.h"
 
+void    print_nbr(char *buff, int zero, int *res)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 8;
+    while (buff[i])
+        i++;
+    if (zero && (j - i))
+    {
+        j = j - i;
+         while (j--)
+            ft_putchar('0');
+    }
+    while (--i >= 0)
+    {
+        ft_putchar(buff[i]);
+        (*res)++;
+    }
+}
+
 void    minuscules(char *lettre)
 {
     int i;
@@ -9,9 +31,9 @@ void    minuscules(char *lettre)
         lettre[i++] += 32;
 }
 
-int    itos(int nbr, int base, int min)
+int    itos(int nbr, int base, int min, int zero)
 {
-    char buff[BUFF_SIZE];
+    char *buff;
     char lettre[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     int cmp;
     int temp;
@@ -20,6 +42,7 @@ int    itos(int nbr, int base, int min)
     cmp = 0;
     temp = 0;
     res = 0;
+    buff = ft_strnew(BUFF_SIZE);
     if(nbr < 0)
     {
         res++;
@@ -34,14 +57,7 @@ int    itos(int nbr, int base, int min)
         buff[cmp] = lettre[temp];
         cmp++;
         nbr = nbr/base;
-
     }
-    cmp--;
-    while (cmp >= 0)
-    {
-        ft_putchar(buff[cmp]);
-        res++;
-        cmp--;
-    }
+    print_nbr(buff, zero, &res);
     return (res);
 }

@@ -5,7 +5,7 @@
 #define BUFF_SIZE 5000
 
 int     ft_printf(const char *format, ...);
-int     itos(int nbr, int base, int min);
+int     itos(int nbr, int base, int min, int zero);
 void    minuscules(char *lettre);
 int     options(char c, va_list* ap);
 
