@@ -13,7 +13,10 @@ void    print_nbr(char *buff, int zero, int *res)
     {
         j = j - i;
          while (j--)
+         {
             ft_putchar('0');
+            (*res)++;
+         }
     }
     while (--i >= 0)
     {
