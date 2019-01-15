@@ -7,6 +7,7 @@
 int     ft_printf(const char *format, ...);
 int     itos(int nbr, int base, int min, int zero);
 void    minuscules(char *lettre);
-int     options(char c, va_list* ap);
+int		ft_isconversion(int c);
+int     options(const char *s, va_list *ap, int *i);
 
 #endif // FT_PRINTF_H_INCLUDED

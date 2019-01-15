@@ -2,8 +2,8 @@
 
 void     unsi_e(char c, va_list *ap, int *res)
 {
-    unsigned int e;
-    void *p;
+    unsigned int    e;
+    void            *p;
 
     if (c == 'p')
     {
@@ -58,16 +58,21 @@ void     alpha_str(char c, va_list *ap, int *res)
     }
 }
 
-int     options(char c, va_list *ap)
+int     options(const char *s, va_list *ap, int *i)
 {
-    int        res;
+    int     res;
 
     res = 0;
-    if (c == 'b' || c == 'i' || c == 'd' || c == 'c' || c == '%')
-        entier(c, ap, &res);
-    if (c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'p')
-        unsi_e(c, ap, &res);
-    if ( c == 's')
-        alpha_str(c, ap, &res);
+    while (ft_isconversion(s[*i]))
+    {
+        if (s[*i] == 'b' || s[*i] == 'i' || s[*i] == 'd' || s[*i] == 'c' || s[*i] == '%')
+            entier(s[*i], ap, &res);
+        if (s[*i] == 'o' || s[*i] == 'u' || s[*i] == 'x' || s[*i] == 'X' || s[*i] == 'p')
+            unsi_e(s[*i], ap, &res);
+        if ( s[*i] == 's')
+            alpha_str(s[*i], ap, &res);
+        (*i)++;
+    }
+    (*i)--;
     return (res);
 }

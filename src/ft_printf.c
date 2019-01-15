@@ -13,7 +13,10 @@ int     ft_printf(const char *format, ...)
     while (format[++i] != '\0')
 	{
         if (format[i] == '%')
-		    res += options(format[++i], &ap);
+        {
+            i++;
+            res += options(format, &ap, &i);
+        }
 		else
         {
             ft_putchar(format[i]);

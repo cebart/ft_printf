@@ -9,11 +9,11 @@ int main()
     void *v;
 
     v = &c;
-    r = printf("%c %s %d %u %X %o %X %o %s %p!\n", c, "toto", 15, 15, 15, 15, 15, 70, "tata", v);
+    r = printf("%c %s %d %u %X %o %X %o %s %p %%!\n", c, "toto", 15, 15, 15, 15, 15, 70, "tata", v);
     ft_putnbr(r);
     ft_putchar('\n');
     r = 0;
-    r = ft_printf("%c %s %d %u %X %o %X %o %s %p!\n", c, "toto", 15, 15, 15, 15, 15, 70, "tata", v);
+    r = ft_printf("%c %s %d %u %X %o %X %o %s %p %%!\n", c, "toto", 15, 15, 15, 15, 15, 70, "tata", v);
     ft_putnbr(r);
     ft_putchar('\n');
 
