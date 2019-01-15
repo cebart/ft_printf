@@ -7,7 +7,7 @@ void     unsi_e(char c, va_list *ap, int *res)
 
     if (c == 'p')
     {
-        p = va_arg(*ap, void *);                        /* manque les 000 */
+        p = va_arg(*ap, void *);
         *res += itos((int)p, 16, 0, 1);
     }
     else

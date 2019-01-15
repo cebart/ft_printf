@@ -45,6 +45,7 @@ void    zero_flag(char *temp, int *j, int *res)                                 
             (*res)++;
         }
 }
+
 void    get_flags(const char *s, int *i, int *res)
 {
     char    *temp;
