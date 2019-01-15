@@ -21,7 +21,7 @@ void    sharp_flag(char *temp, int *j, int *res)
         }
 }
 
-void    zero_flag(char *temp, int *j, int *res)
+void    zero_flag(char *temp, int *j, int *res)                                 /* /!\ affiche le nombre de zero + la convertion aulieu de nombre de zero - nb print par convertion */
 {
         int     i;
         int     tp;
@@ -38,7 +38,7 @@ void    zero_flag(char *temp, int *j, int *res)
             nbr[i] = temp[(*j)];
             i++;
         }
-        i = ft_atoi(nbr) - 1;
+        i = ft_atoi(nbr);
         while (--i > 0)
         {
             ft_putchar('0');

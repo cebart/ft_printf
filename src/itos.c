@@ -7,6 +7,8 @@ void    print_nbr(char *buff, int zero, int *res)
 
     i = 0;
     j = 8;
+    if (buff[i] == 0)
+        ft_putchar('0');
     while (buff[i])
         i++;
     if (zero && (j - i))
