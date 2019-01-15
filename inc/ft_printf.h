@@ -9,5 +9,6 @@ int     itos(int nbr, int base, int min, int zero);
 void    minuscules(char *lettre);
 int		ft_isconversion(int c);
 int     options(const char *s, va_list *ap, int *i);
+void    do_flag(char c, int *res);
 
 #endif // FT_PRINTF_H_INCLUDED

@@ -31,7 +31,6 @@ void     entier(char c, va_list *ap, int *res)
     e = va_arg(*ap, int);
     if (c == 'b')
         *res += itos(e, 2, 0, 0);
- //   if (c = 'i')
     if (c == 'd' || c == 'i')
         *res += itos(e, 10, 0, 0);
     if (c == '%')
@@ -58,12 +57,48 @@ void     alpha_str(char c, va_list *ap, int *res)
     }
 }
 
+void    get_flags(const char *s, int *i, int *res)
+{
+    char    *temp;
+    int     j;
+
+    temp = ft_strdup(s);
+    j = *i;
+    if (temp[j] == '#')
+    {
+        while (!ft_isconversion(temp[j]))
+            j++;
+        if (temp[j] == 'o')
+        {
+            ft_putchar('0');
+            (*res)++;
+        }
+        else if (temp[j] == 'x')
+        {
+            ft_putstr("0x");
+            (*res) += 2 ;
+        }
+        else if (temp[j] == 'X')
+        {
+            ft_putstr("0X");
+            (*res) += 2 ;
+        }
+    }
+}
+
 int     options(const char *s, va_list *ap, int *i)
 {
     int     res;
+//    char    *flag;
 
+  //  flag = ft_strnew(10);              /* # | 0 | - | + | h | hh | l | ll | j | z */
     res = 0;
-    while (ft_isconversion(s[*i]))
+    while (!ft_isconversion(s[*i]))
+    {
+        get_flags(s, i, &res);
+        (*i)++;
+    }
+    if (ft_isconversion(s[*i]))
     {
         if (s[*i] == 'b' || s[*i] == 'i' || s[*i] == 'd' || s[*i] == 'c' || s[*i] == '%')
             entier(s[*i], ap, &res);
@@ -71,8 +106,6 @@ int     options(const char *s, va_list *ap, int *i)
             unsi_e(s[*i], ap, &res);
         if ( s[*i] == 's')
             alpha_str(s[*i], ap, &res);
-        (*i)++;
     }
-    (*i)--;
     return (res);
 }
