@@ -57,35 +57,6 @@ void     alpha_str(char c, va_list *ap, int *res)
     }
 }
 
-void    get_flags(const char *s, int *i, int *res)
-{
-    char    *temp;
-    int     j;
-
-    temp = ft_strdup(s);
-    j = *i;
-    if (temp[j] == '#')
-    {
-        while (!ft_isconversion(temp[j]))
-            j++;
-        if (temp[j] == 'o')
-        {
-            ft_putchar('0');
-            (*res)++;
-        }
-        else if (temp[j] == 'x')
-        {
-            ft_putstr("0x");
-            (*res) += 2 ;
-        }
-        else if (temp[j] == 'X')
-        {
-            ft_putstr("0X");
-            (*res) += 2 ;
-        }
-    }
-}
-
 int     options(const char *s, va_list *ap, int *i)
 {
     int     res;
