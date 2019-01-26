@@ -52,7 +52,7 @@ void    zero_flag(char *temp, int **j, t_print *f)
         }
 }
 
-void    minus_flag(char *temp, int **j, t_print *f)
+void    minus_flag(char *temp, int **j, t_print *f)                          //   renvoyer juste le nbr puis afficher dans print ' ' jusqu'a nbr
 {
         int     i;
         char    *nbr;
@@ -94,7 +94,7 @@ t_print    get_flags(const char *s, int *i, int *res, t_print f)
         sharp_flag(temp, &i, res);
     if (temp[*i] == '0')
         zero_flag(temp, &i, pf);
-    if (temp[*i] == '+')
+    if (temp[*i] == '+')                             //   /!\ prend une place en cas de 0 ou -
     {
         f.plus = 1;
         (*i)++;
