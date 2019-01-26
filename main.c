@@ -7,15 +7,17 @@ int main()
     char c = 'c';
     int r = 0;
     void *v;
+    char *s;
 
     v = &c;
-    r = printf("%c %s %010d %u %#X %o %X %#o %s %p %%!\n", c, "toto", 1, 15, 15, 15, 15, 70, "tata", v);
+    s = ft_strnew(10);
+    r = printf("test %p %c %s %d %u %#X %o %#x %#o %s %p %010d %d!\n", s, c, "toto", 10, 1542, 15, 15, 15, 15,"tata", v, 79, 81);
     ft_putnbr(r);
     ft_putchar('\n');
     r = 0;
-    r = ft_printf("%c %s %010d %u %#X %o %X %#o %s %p %%!\n", c, "toto", 1, 15, 15, 15, 15, 70, "tata", v);
+    r = ft_printf("test %p %c %s %d %u %#X %o %#x %#o %s %p %010d %d!\n", s, c, "toto", 10, 1542, 15, 15, 15, 15,"tata", v, 79, 81);
     ft_putnbr(r);
     ft_putchar('\n');
 
-    return 0;
+    return (0);
 }

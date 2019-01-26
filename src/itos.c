@@ -1,9 +1,10 @@
 # include "../inc/ft_printf.h"
 
-void    print_nbr(char *buff, int zero, int *res)
+void    print_nbr(char *buff, int zero, int *res, char *flag)
 {
     int i;
     int j;
+    int temp;
 
     i = 0;
     j = 8;
@@ -20,11 +21,28 @@ void    print_nbr(char *buff, int zero, int *res)
             (*res)++;
          }
     }
-    while (--i >= 0)
+    if (flag && flag[0] != '\0')
     {
-        ft_putchar(buff[i]);
-        (*res)++;
+        i = 0;
+        temp = ft_strlen(flag) - 1;
+        while (buff[i])
+        {
+            flag[temp] = buff[i];
+            temp--;
+            i++;
+        }
+        ft_putstr(flag);
+        (*res) = ft_strlen(flag);
     }
+    else
+    {
+        while (--i >= 0)
+        {
+            ft_putchar(buff[i]);
+            (*res)++;
+        }
+    }
+  //  ft_bzero(flag, ft_strlen(flag));
 }
 
 void    minuscules(char *lettre)
@@ -36,7 +54,7 @@ void    minuscules(char *lettre)
         lettre[i++] += 32;
 }
 
-int    itos(int nbr, int base, int min, int zero)
+int    itos(int nbr, int base, int min, int zero, char *flag)
 {
     char *buff;
     char lettre[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -48,6 +66,8 @@ int    itos(int nbr, int base, int min, int zero)
     temp = 0;
     res = 0;
     buff = ft_strnew(BUFF_SIZE);
+ /*   ft_putnbr(nbr);
+    ft_putchar('\n');*/
     if(nbr < 0)
     {
         res++;
@@ -63,6 +83,6 @@ int    itos(int nbr, int base, int min, int zero)
         cmp++;
         nbr = nbr/base;
     }
-    print_nbr(buff, zero, &res);
+    print_nbr(buff, zero, &res, flag);
     return (res);
 }
