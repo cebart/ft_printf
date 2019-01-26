@@ -29,20 +29,23 @@ void     entier(char c, va_list *ap, int *res, char *flag)
 {
     int e;
 
-    e = va_arg(*ap, int);
-    if (c == 'b')
-        *res += itos(e, 2, 0, 0, flag);
-    if (c == 'd' || c == 'i')
-        *res += itos(e, 10, 0, 0, flag);
     if (c == '%')
     {
-        ft_putchar(c);
+        ft_putchar('%');
         (*res)++;
     }
-    if (c == 'c')
+    else
     {
-        ft_putchar(e);
-        (*res)++;
+        e = va_arg(*ap, int);
+        if (c == 'b')
+            *res += itos(e, 2, 0, 0, flag);
+        if (c == 'd' || c == 'i')
+            *res += itos(e, 10, 0, 0, flag);
+        if (c == 'c')
+        {
+            ft_putchar(e);
+            (*res)++;
+        }
     }
 }
 
@@ -62,11 +65,9 @@ int     options(const char *s, va_list *ap, int *i)
 {
     int     res;
     char    *flag;
-    int     b_flag;
 //    char    *flag;
 
   //  flag = ft_strnew(10);              /* # | 0 | - | + | h | hh | l | ll | j | z */
-    b_flag = 0;
     res = 0;
     flag = ft_strnew(1);
     if (!ft_isconversion(s[*i]))
