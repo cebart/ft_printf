@@ -2,36 +2,32 @@
 
 void     unsi_e(char c, va_list *ap, int *res, t_print f)
 {
-    unsigned int    e;
-    void            *p;
-
     if (c == 'p')
     {
-        p = va_arg(*ap, void *);
+        f.p = va_arg(*ap, void *);
         f.zero = 1;
-        *res += itos((int)p, 16, f);
+        f.nbr = (int)f.p;
+        *res += itos(16, f);
     }
     else
     {
-        e = va_arg(*ap, unsigned int);
+        f.nbr = va_arg(*ap, unsigned int);
         if (c == 'o')
-            *res += itos(e, 8, f);
+            *res += itos(8, f);
         if (c == 'u')
-            *res += itos(e, 10, f);
+            *res += itos(10, f);
         if (c == 'X')
-            *res += itos(e, 16, f);
+            *res += itos(16, f);
         if (c == 'x')
         {
             f.min = 1;
-            *res += itos(e, 16, f);
+            *res += itos(16, f);
         }
     }
 }
 
 void     entier(char c, va_list *ap, int *res, t_print f)
 {
-    int e;
-
     if (c == '%')
     {
         ft_putchar('%');
@@ -39,14 +35,14 @@ void     entier(char c, va_list *ap, int *res, t_print f)
     }
     else
     {
-        e = va_arg(*ap, int);
+        f.nbr = va_arg(*ap, int);
         if (c == 'b')
-            *res += itos(e, 2, f);
+            *res += itos(2, f);
         if (c == 'd' || c == 'i')
-            *res += itos(e, 10, f);
+            *res += itos(10, f);
         if (c == 'c')
         {
-            ft_putchar(e);
+            ft_putchar(f.nbr);
             (*res)++;
         }
     }
@@ -72,7 +68,7 @@ int     options(const char *s, va_list *ap, int *i)
     res = 0;
     flag_plus = set_struct();
     if (!ft_isconversion(s[*i]))
-        flag_plus.flag = get_flags(s, i, &res);
+        flag_plus = get_flags(s, i, &res, flag_plus);
     if (ft_isconversion(s[*i]))
     {
         if (s[*i] == 'b' || s[*i] == 'i' || s[*i] == 'd' || s[*i] == 'c' || s[*i] == '%')
