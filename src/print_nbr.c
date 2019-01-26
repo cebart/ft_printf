@@ -4,7 +4,6 @@ void    print_nbr(char *buff, int *res, t_print f)
 {
     int i;
     int j;
-    int temp;
 
     i = 0;
     j = 8;
@@ -21,36 +20,40 @@ void    print_nbr(char *buff, int *res, t_print f)
             (*res)++;
          }
     }
-    if (f.flag && f.flag[0] != '\0' && f.f_zero)
+    if (f.f_zero)
     {
-        i = 0;
-        temp = ft_strlen(f.flag) - 1;
-        while (buff[i])
-        {
-            f.flag[temp] = buff[i];
-            temp--;
-            i++;
-        }
-        ft_putstr(f.flag);
-        (*res) = ft_strlen(f.flag);
-    }
-    else if (f.flag && f.flag[0] != '\0' && f.minus)
-    {
+
         j = 0;
-        while (--i >= 0)
+        f.f_to_print = f.f_to_print - ft_strlen(buff);
+        while (j < f.f_to_print)
         {
-            f.flag[j] = buff[i];
+            ft_putchar('0');
             j++;
+            (*res)++;
         }
-        ft_putstr(f.flag);
-        (*res) = ft_strlen(f.flag);
-    }
-    else
-    {
         while (--i >= 0)
         {
             ft_putchar(buff[i]);
             (*res)++;
+        }
+    }
+    else
+    {
+        j = 0;
+        while (--i >= 0)
+        {
+            ft_putchar(buff[i]);
+            (*res)++;
+            j++;
+        }
+        if (f.minus == 1)
+        {
+            while (j < f.f_to_print)
+            {
+                    ft_putchar(' ');
+                    j++;
+                    (*res)++;
+            }
         }
     }
 }

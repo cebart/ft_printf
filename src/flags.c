@@ -30,7 +30,7 @@ void    zero_flag(char *temp, int **j, t_print *f)
         i = 0;
         k = **j;
         (*f).f_zero = 1;
-        while (ft_isdigit(temp[(**j)]))
+        while (ft_isdigit(temp[**j]))
         {
             (**j)++;
             i++;
@@ -42,17 +42,10 @@ void    zero_flag(char *temp, int **j, t_print *f)
             nbr[i] = temp[k];
             i++;
         }
-        i = ft_atoi(nbr);
-        (*f).flag = ft_strnew(i);
-        k = 0;
-        while (i-- > 0)
-        {
-            (*f).flag[k] = '0';
-            k++;
-        }
+        (*f).f_to_print = ft_atoi(nbr);
 }
 
-void    minus_flag(char *temp, int **j, t_print *f)                          //   renvoyer juste le nbr puis afficher dans print ' ' jusqu'a nbr
+void    minus_flag(char *temp, int **j, t_print *f)                          //   renvoyer juste le nbr puis afficher dans print ' ' jusqu'a nbr (same pour zero_flag)
 {
         int     i;
         char    *nbr;
@@ -73,14 +66,7 @@ void    minus_flag(char *temp, int **j, t_print *f)                          // 
             nbr[i] = temp[k];
             i++;
         }
-        i = ft_atoi(nbr);
-        (*f).flag = ft_strnew(i);
-        k = 0;
-        while (i-- > 0)
-        {
-            (*f).flag[k] = ' ';
-            k++;
-        }
+        (*f).f_to_print = ft_atoi(nbr);
 }
 
 t_print    get_flags(const char *s, int *i, int *res, t_print f)

@@ -12,5 +12,6 @@ t_print     set_struct(void)
     new.p = NULL;
     new.minus = 0;
     new.f_zero = 0;
+    new.f_to_print = 0;
     return (new);
 }

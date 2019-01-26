@@ -15,6 +15,7 @@ typedef struct		s_print
     void    *p;
     int     minus;
     int     f_zero;
+    int     f_to_print;
 } t_print;
 
 int     ft_printf(const char *format, ...);
