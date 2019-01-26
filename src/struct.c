@@ -4,7 +4,7 @@ t_print     set_struct(void)
 {
     t_print new;
 
-    new.flag = ft_strnew(1);
+    new.flag = ft_strnew(1);   // useless ??
     new.plus = 0;
     new.min = 0;
     new.zero = 0;

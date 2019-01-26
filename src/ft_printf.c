@@ -9,7 +9,6 @@ int     ft_printf(const char *format, ...)
     res = 0;
     va_list ap;
     va_start(ap, format);
-
     while (format[++i] != '\0')
 	{
         if (format[i] == '%')

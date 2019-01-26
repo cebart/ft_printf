@@ -9,7 +9,7 @@ void    minuscules(char *lettre)
         lettre[i++] += 32;
 }
 
-int    itos(int base, t_print f)    //itos(int nbr, int base, int min, int zero, t_print f)
+int    itos(int base, t_print f)
 {
     char *buff;
     char lettre[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -26,7 +26,7 @@ int    itos(int base, t_print f)    //itos(int nbr, int base, int min, int zero,
         res++;
         ft_putchar('-');
     }
-    else if(f.plus > 0)
+    else if(f.plus)
     {
         res++;
         ft_putchar('+');
