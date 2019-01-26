@@ -26,10 +26,3 @@ int     ft_printf(const char *format, ...)
     va_end(ap);
     return (res);
 }
-
-/*static int va_somme(int n, va_list* arg)
-{
-    if (n == 0) return 0;
-    else return = va_arg(*arg, int) + va_somme(n-1, arg);
-}
-*/

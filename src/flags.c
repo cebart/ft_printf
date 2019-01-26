@@ -21,7 +21,7 @@ void    sharp_flag(char *temp, int **j, int *res)
         }
 }
 
-char    *zero_flag(char *temp, int **j)                                 /* /!\ affiche le nombre de zero + la convertion aulieu de nombre de zero - nb print par convertion */
+char    *zero_flag(char *temp, int **j)
 {
         int     i;
         char    *nbr;

@@ -1,6 +1,6 @@
 # include "../inc/ft_printf.h"
 
-void    print_nbr(char *buff, int zero, int *res, char *flag)
+void    print_nbr(char *buff, int *res, t_print f)
 {
     int i;
     int j;
@@ -12,7 +12,7 @@ void    print_nbr(char *buff, int zero, int *res, char *flag)
         ft_putchar('0');
     while (buff[i])
         i++;
-    if (zero && (j - i))
+    if (f.zero && (j - i))
     {
         j = j - i;
          while (j--)
@@ -21,18 +21,18 @@ void    print_nbr(char *buff, int zero, int *res, char *flag)
             (*res)++;
          }
     }
-    if (flag && flag[0] != '\0')
+    if (f.flag && f.flag[0] != '\0')
     {
         i = 0;
-        temp = ft_strlen(flag) - 1;
+        temp = ft_strlen(f.flag) - 1;
         while (buff[i])
         {
-            flag[temp] = buff[i];
+            f.flag[temp] = buff[i];
             temp--;
             i++;
         }
-        ft_putstr(flag);
-        (*res) = ft_strlen(flag);
+        ft_putstr(f.flag);
+        (*res) = ft_strlen(f.flag);
     }
     else
     {
@@ -42,7 +42,6 @@ void    print_nbr(char *buff, int zero, int *res, char *flag)
             (*res)++;
         }
     }
-  //  ft_bzero(flag, ft_strlen(flag));
 }
 
 void    minuscules(char *lettre)
@@ -54,7 +53,7 @@ void    minuscules(char *lettre)
         lettre[i++] += 32;
 }
 
-int    itos(int nbr, int base, int min, int zero, char *flag)
+int    itos(int nbr, int base, t_print f)    //itos(int nbr, int base, int min, int zero, t_print f)
 {
     char *buff;
     char lettre[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -66,14 +65,12 @@ int    itos(int nbr, int base, int min, int zero, char *flag)
     temp = 0;
     res = 0;
     buff = ft_strnew(BUFF_SIZE);
- /*   ft_putnbr(nbr);
-    ft_putchar('\n');*/
     if(nbr < 0)
     {
         res++;
         ft_putchar('-');
     }
-    if (min != 0)
+    if (f.min != 0)
         minuscules(lettre);
     while(nbr != 0)
     {
@@ -83,6 +80,6 @@ int    itos(int nbr, int base, int min, int zero, char *flag)
         cmp++;
         nbr = nbr/base;
     }
-    print_nbr(buff, zero, &res, flag);
+    print_nbr(buff, &res, f);
     return (res);
 }

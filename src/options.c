@@ -1,6 +1,6 @@
 # include "../inc/ft_printf.h"
 
-void     unsi_e(char c, va_list *ap, int *res, char *flag)
+void     unsi_e(char c, va_list *ap, int *res, t_print f)
 {
     unsigned int    e;
     void            *p;
@@ -8,24 +8,27 @@ void     unsi_e(char c, va_list *ap, int *res, char *flag)
     if (c == 'p')
     {
         p = va_arg(*ap, void *);
-        *res += itos((int)p, 16, 0, 1, flag);
+        f.zero = 1;
+        *res += itos((int)p, 16, f);
     }
     else
     {
         e = va_arg(*ap, unsigned int);
         if (c == 'o')
-            *res += itos(e, 8, 0, 0, flag);
+            *res += itos(e, 8, f);
         if (c == 'u')
-            *res += itos(e, 10, 0, 0, flag);
+            *res += itos(e, 10, f);
         if (c == 'X')
-            *res += itos(e, 16, 0, 0, flag);
+            *res += itos(e, 16, f);
         if (c == 'x')
-            *res += itos(e, 16, 1, 0, flag);
-
+        {
+            f.min = 1;
+            *res += itos(e, 16, f);
+        }
     }
 }
 
-void     entier(char c, va_list *ap, int *res, char *flag)
+void     entier(char c, va_list *ap, int *res, t_print f)
 {
     int e;
 
@@ -38,9 +41,9 @@ void     entier(char c, va_list *ap, int *res, char *flag)
     {
         e = va_arg(*ap, int);
         if (c == 'b')
-            *res += itos(e, 2, 0, 0, flag);
+            *res += itos(e, 2, f);
         if (c == 'd' || c == 'i')
-            *res += itos(e, 10, 0, 0, flag);
+            *res += itos(e, 10, f);
         if (c == 'c')
         {
             ft_putchar(e);
@@ -64,20 +67,18 @@ void     alpha_str(char c, va_list *ap, int *res)
 int     options(const char *s, va_list *ap, int *i)
 {
     int     res;
-    char    *flag;
-//    char    *flag;
+    t_print flag_plus;
 
-  //  flag = ft_strnew(10);              /* # | 0 | - | + | h | hh | l | ll | j | z */
     res = 0;
-    flag = ft_strnew(1);
+    flag_plus = set_struct();
     if (!ft_isconversion(s[*i]))
-        flag = get_flags(s, i, &res);
+        flag_plus.flag = get_flags(s, i, &res);
     if (ft_isconversion(s[*i]))
     {
         if (s[*i] == 'b' || s[*i] == 'i' || s[*i] == 'd' || s[*i] == 'c' || s[*i] == '%')
-            entier(s[*i], ap, &res, flag);
+            entier(s[*i], ap, &res, flag_plus);
         if (s[*i] == 'o' || s[*i] == 'u' || s[*i] == 'x' || s[*i] == 'X' || s[*i] == 'p')
-            unsi_e(s[*i], ap, &res, flag);
+            unsi_e(s[*i], ap, &res, flag_plus);
         if ( s[*i] == 's')
             alpha_str(s[*i], ap, &res);
     }
