@@ -42,10 +42,10 @@ void    zero_flag(char *temp, int **j, t_print *f)
             nbr[i] = temp[k];
             i++;
         }
-        (*f).f_to_print = ft_atoi(nbr);
+        (*f).f_to_print = (*f).f_to_print + ft_atoi(nbr);
 }
 
-void    minus_flag(char *temp, int **j, t_print *f)                          //   renvoyer juste le nbr puis afficher dans print ' ' jusqu'a nbr (same pour zero_flag)
+void    minus_flag(char *temp, int **j, t_print *f)                          //   faire une fonction avec zero_flag
 {
         int     i;
         char    *nbr;
@@ -66,7 +66,7 @@ void    minus_flag(char *temp, int **j, t_print *f)                          // 
             nbr[i] = temp[k];
             i++;
         }
-        (*f).f_to_print = ft_atoi(nbr);
+        (*f).f_to_print = (*f).f_to_print + ft_atoi(nbr);
 }
 
 t_print    get_flags(const char *s, int *i, int *res, t_print f)
@@ -80,9 +80,10 @@ t_print    get_flags(const char *s, int *i, int *res, t_print f)
         sharp_flag(temp, &i, res);
     if (temp[*i] == '0')
         zero_flag(temp, &i, pf);
-    if (temp[*i] == '+')                             //   /!\ prend une place en cas de 0 ou -
+    if (temp[*i] == '+')
     {
         f.plus = 1;
+        f.f_to_print--;
         (*i)++;
     }
     if (temp[*i] == '-')
