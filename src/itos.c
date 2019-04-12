@@ -12,7 +12,7 @@ void    minuscules(char *lettre)
 int    itos(int base, t_print f)
 {
     char *buff;
-    char lettre[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char lettre[] = "0123456789ABCDEF";
     int cmp;
     int temp;
     int res;
