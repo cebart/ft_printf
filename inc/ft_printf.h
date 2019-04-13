@@ -1,8 +1,11 @@
 #ifndef FT_PRINTF_H_INCLUDED
 #define FT_PRINTF_H_INCLUDED
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdarg.h>
+#include <limits.h>
 # include "../libft/libft.h"
-#define BUFF_SIZE 5000
+#define BUFF_SIZE 50000
 
 
 typedef struct		s_print
@@ -19,7 +22,8 @@ typedef struct		s_print
 } t_print;
 
 int     ft_printf(const char *format, ...);
-int     itos(int base, t_print f);
+int     itos(int base, t_print f, unsigned long long nbr);
+int     signed_itos(int base, t_print f, long long nbr);
 void    entier(char c, va_list *ap, int *res, t_print f);
 void    unsi_e(char c, va_list *ap, int *res, t_print f);
 void    minuscules(char *lettre);

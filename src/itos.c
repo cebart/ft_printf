@@ -9,38 +9,52 @@ void    minuscules(char *lettre)
         lettre[i++] += 32;
 }
 
-int    itos(int base, t_print f)
+int     signed_itos(int base, t_print f, long long nbr)
+{
+        int res;
+
+        res = 0;
+        ft_putchar('-');
+        res++;
+        nbr = -nbr;
+        res += itos(base, f, nbr);
+        return (res);
+}
+
+int    itos(int base, t_print f, unsigned long long nbr)
 {
     char *buff;
     char lettre[] = "0123456789ABCDEF";
-    int cmp;
+    int i;
     int temp;
     int res;
 
-    cmp = 0;
-    temp = 0;
+    i = 0;
+    temp = nbr;
     res = 0;
-    buff = ft_strnew(BUFF_SIZE);
-    if(f.nbr < 0)
-    {
-        res++;
-        ft_putchar('-');
-    }
-    else if(f.plus)
+    if(f.plus)
     {
         res++;
         ft_putchar('+');
     }
+    while (temp >= base)
+	{
+		temp = temp / base;
+		i++;
+	}
+    buff = ft_strnew(i);
+	i = 0;
+	temp = 0;
     if (f.min != 0)
         minuscules(lettre);
-    while(f.nbr != 0)
+    while(nbr != 0)
     {
-        temp = f.nbr % base;
-        temp = (temp < 0) ? -temp : temp;
-        buff[cmp] = lettre[temp];
-        cmp++;
-        f.nbr = f.nbr/base;
+        temp = nbr % base;
+        buff[i] = lettre[temp];
+        i++;
+        nbr = nbr/base;
     }
     print_nbr(buff, &res, f);
     return (res);
 }
+

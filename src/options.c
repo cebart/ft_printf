@@ -7,21 +7,21 @@ void     unsi_e(char c, va_list *ap, int *res, t_print f)
         f.p = va_arg(*ap, void *);
         f.zero = 1;
         f.nbr = (int)f.p;
-        *res += itos(16, f);
+        *res += itos(16, f, f.nbr);
     }
     else
     {
         f.nbr = va_arg(*ap, unsigned int);
         if (c == 'o')
-            *res += itos(8, f);
+            *res += itos(8, f, f.nbr);
         if (c == 'u')
-            *res += itos(10, f);
+            *res += itos(10, f, f.nbr);
         if (c == 'X')
-            *res += itos(16, f);
+            *res += itos(16, f, f.nbr);
         if (c == 'x')
         {
             f.min = 1;
-            *res += itos(16, f);
+            *res += itos(16, f, f.nbr);
         }
     }
 }
@@ -37,9 +37,14 @@ void     entier(char c, va_list *ap, int *res, t_print f)
     {
         f.nbr = va_arg(*ap, int);
         if (c == 'b')
-            *res += itos(2, f);
-        if (c == 'd' || c == 'i')
-            *res += itos(10, f);
+            *res += itos(2, f, f.nbr);
+        if (c == 'd' || c == 'i' || c == 'D')
+        {
+            if (f.nbr >=0)
+                *res += itos(10, f, f.nbr);
+            else
+                *res += signed_itos(10, f, f.nbr);
+        }
         if (c == 'c')
         {
             ft_putchar(f.nbr);
