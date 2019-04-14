@@ -15,18 +15,17 @@ int     signed_itos(int base, t_print f, long long nbr)
 
         res = 0;
         ft_putchar('-');
-        res++;
         nbr = -nbr;
-        res += itos(base, f, nbr);
+        res += itos(base, f, nbr) + 1;
         return (res);
 }
 
-int    itos(int base, t_print f, unsigned long long nbr)
+int    itos(unsigned int base, t_print f, size_t nbr)
 {
     char *buff;
     char lettre[] = "0123456789ABCDEF";
     int i;
-    int temp;
+    size_t temp;
     int res;
 
     i = 0;

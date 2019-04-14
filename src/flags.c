@@ -49,7 +49,7 @@ void    zero_flag(char *temp, int **j, t_print *f)
         (*f).f_to_print = (*f).f_to_print + ft_atoi(nbr);
 }
 
-void    minus_flag(char *temp, int **j, t_print *f)                          //   faire une fonction avec zero_flag
+void    minus_flag(char *temp, int **j, t_print *f)
 {
         int     i;
         char    *nbr;
@@ -93,11 +93,13 @@ t_print    get_flags(const char *s, int *i, int *res, t_print f)
     if ((temp[*i] == 'l' && temp[(*i) + 1] == 'l') || temp[*i] == 'L')
     {
         f.lon_long = 1;
-        (*i)++;
+        f.uns_lon_long = 1;
+        (*i) += 2;
     }
     else if (temp[*i] == 'l')
     {
         f.lon = 1;
+        f.uns_lon = 1;
         (*i)++;
     }
     return (f);

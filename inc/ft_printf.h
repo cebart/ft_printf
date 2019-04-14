@@ -14,9 +14,11 @@ typedef struct		s_print
     int             plus;
     int             min;
     int             zero;
-    size_t          lon;
-    size_t          lon_long;
+    long int        lon;
+    long long int   lon_long;
     unsigned int    uns_nbr;
+    size_t          uns_lon;
+    size_t          uns_lon_long;
     int             nbr;
     void            *p;
     int             minus;
@@ -25,13 +27,15 @@ typedef struct		s_print
 } t_print;
 
 int     ft_printf(const char *format, ...);
-int     itos(int base, t_print f, unsigned long long nbr);
+int     itos(unsigned int base, t_print f, size_t nbr);
 int     signed_itos(int base, t_print f, long long nbr);
 void    entier(char c, va_list *ap, int *res, t_print f);
+void     conver_entier(char c, int *res, t_print f, long long int nbr);
 void    unsi_e(char c, va_list *ap, int *res, t_print f);
 void    conver_unsi_e(char c, int *res, t_print f, size_t nbr);
 void    minuscules(char *lettre);
 int		ft_isconversion(int c);
+char    check_long(char c, t_print *f);
 int     options(const char *s, va_list *ap, int *i);
 void    do_flag(char c, int *res);
 t_print get_flags(const char *s, int *i, int *res, t_print f);

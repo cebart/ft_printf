@@ -11,6 +11,8 @@ t_print     set_struct(void)
     new.lon = 0;
     new.lon_long = 0;
     new.uns_nbr = 0;
+    new.uns_lon = 0;
+    new.uns_lon_long = 0;
     new.nbr = 0;
     new.p = NULL;
     new.minus = 0;

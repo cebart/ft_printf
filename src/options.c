@@ -11,16 +11,16 @@ void     unsi_e(char c, va_list *ap, int *res, t_print f)
     }
     else
     {
-        if (f.lon)
+        c = check_long(c, &f);
+        if (f.uns_lon_long)
         {
-            f.lon = va_arg(*ap, unsigned long int);
-            conver_unsi_e(c, res, f, f.lon);
+            f.uns_lon_long = va_arg(*ap, unsigned long long int);
+            conver_unsi_e(c, res, f, f.uns_lon_long);
         }
-
-        else if (f.lon_long)
+        else if (f.uns_lon)
         {
-            f.lon_long = va_arg(*ap, unsigned long long int);
-            conver_unsi_e(c, res, f, f.lon_long);
+            f.uns_lon = va_arg(*ap, unsigned long int);
+            conver_unsi_e(c, res, f, f.uns_lon);
         }
         else
         {
@@ -54,22 +54,41 @@ void     entier(char c, va_list *ap, int *res, t_print f)
     }
     else
     {
-        f.nbr = va_arg(*ap, int);
+        c = check_long(c, &f);
+        if (f.lon_long)
+        {
+            f.lon_long = va_arg(*ap, long long int);
+            conver_entier(c, res, f, f.lon_long);
+        }
+        else if (f.lon)
+        {
+            f.lon = va_arg(*ap, long int);
+            conver_entier(c, res, f, f.lon);
+        }
+        else
+        {
+            f.nbr = va_arg(*ap, int);
+            conver_entier(c, res, f, f.nbr);
+        }
+    }
+}
+
+void     conver_entier(char c, int *res, t_print f, long long int nbr)
+{
         if (c == 'b')
-            *res += itos(2, f, f.nbr);
-        if (c == 'd' || c == 'i' || c == 'D')
+            *res += itos(2, f, nbr);
+        if (c == 'd' || c == 'i')
         {
             if (f.nbr >=0)
-                *res += itos(10, f, f.nbr);
+                *res += itos(10, f, nbr);
             else
-                *res += signed_itos(10, f, f.nbr);
+                *res += signed_itos(10, f, nbr);
         }
         if (c == 'c')
         {
-            ft_putchar(f.nbr);
+            ft_putchar(nbr);
             (*res)++;
         }
-    }
 }
 
 void     alpha_str(char c, va_list *ap, int *res)
@@ -95,9 +114,11 @@ int     options(const char *s, va_list *ap, int *i)
         flag_plus = get_flags(s, i, &res, flag_plus);
     if (ft_isconversion(s[*i]))
     {
-        if (s[*i] == 'b' || s[*i] == 'i' || s[*i] == 'd' || s[*i] == 'c' || s[*i] == '%')
+        if (s[*i] == 'b' || s[*i] == 'i' || s[*i] == 'd'
+                || s[*i] == 'c' || s[*i] == '%' || s[*i] == 'D')
             entier(s[*i], ap, &res, flag_plus);
-        if (s[*i] == 'o' || s[*i] == 'u' || s[*i] == 'x' || s[*i] == 'X' || s[*i] == 'p')
+        if (s[*i] == 'o' || s[*i] == 'u' || s[*i] == 'x' || s[*i] == 'X'
+                || s[*i] == 'p' || s[*i] == 'O' || s[*i] == 'U')
             unsi_e(s[*i], ap, &res, flag_plus);
         if ( s[*i] == 's')
             alpha_str(s[*i], ap, &res);
