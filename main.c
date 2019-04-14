@@ -13,11 +13,11 @@ int main()
 
     v = &c;
     s = ft_strnew(10);
-    r = printf("%% test %p %c %s %+-10d %ld %#X %o %#x %#o %s %p %010d %d!\n", s, c, "toto", 10, l, 89, 56, 15, 15,"tata", v, 79, -81);
+    r = printf("%% test %p %c %s %+-10d %ld %#X %s %lo %lu %c %#lo %s %p %010d %d!\n", s, c, "toto", 10, l, 89, "test", l, l, c, l,"tata", v, 79, -81);
     ft_putnbr(r);
     ft_putchar('\n');
     r = 0;
-    r = ft_printf("%% test %p %c %s %+-10d %d %#X %o %#x %#o %s %p %010d %d!\n", s, c, "toto", 10, l, 89, 56, 15, 15,"tata", v, 79, -81);
+    r = ft_printf("%% test %p %c %s %+-10d %d %#X %s %lo %lu %c %#lo %s %p %010d %d!\n", s, c, "toto", 10, l, 89, "test", l, l, c, l,"tata", v, 79, -81);
     ft_putnbr(r);
     ft_putchar('\n');
     return (0);

@@ -56,4 +56,5 @@ void    print_nbr(char *buff, int *res, t_print f)
             }
         }
     }
+    ft_strdel(&buff);
 }

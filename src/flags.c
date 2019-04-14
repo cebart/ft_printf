@@ -2,23 +2,27 @@
 
 void    sharp_flag(char *temp, int **j, int *res)
 {
-        while (!ft_isconversion(temp[**j]))
-            (**j)++;
-        if (temp[**j] == 'o')
+        int k;
+
+        k = **j;
+        while (!ft_isconversion(temp[k]))
+            k++;
+        if (temp[k] == 'o')
         {
             ft_putchar('0');
             (*res)++;
         }
-        else if (temp[**j] == 'x')
+        else if (temp[k] == 'x')
         {
             ft_putstr("0x");
             (*res) += 2 ;
         }
-        else if (temp[**j] == 'X')
+        else if (temp[k] == 'X')
         {
             ft_putstr("0X");
             (*res) += 2 ;
         }
+        (**j)++;
 }
 
 void    zero_flag(char *temp, int **j, t_print *f)
@@ -72,14 +76,12 @@ void    minus_flag(char *temp, int **j, t_print *f)                          // 
 t_print    get_flags(const char *s, int *i, int *res, t_print f)
 {
     char    *temp;
-    t_print *pf;
 
-    pf = &f;
     temp = ft_strdup(s);
     if (temp[*i] == '#')
         sharp_flag(temp, &i, res);
     if (temp[*i] == '0')
-        zero_flag(temp, &i, pf);
+        zero_flag(temp, &i, &f);
     if (temp[*i] == '+')
     {
         f.plus = 1;
@@ -87,6 +89,16 @@ t_print    get_flags(const char *s, int *i, int *res, t_print f)
         (*i)++;
     }
     if (temp[*i] == '-')
-        minus_flag(temp, &i, pf);
+        minus_flag(temp, &i, &f);
+    if ((temp[*i] == 'l' && temp[(*i) + 1] == 'l') || temp[*i] == 'L')
+    {
+        f.lon_long = 1;
+        (*i)++;
+    }
+    else if (temp[*i] == 'l')
+    {
+        f.lon = 1;
+        (*i)++;
+    }
     return (f);
 }

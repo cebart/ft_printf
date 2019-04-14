@@ -11,19 +11,38 @@ void     unsi_e(char c, va_list *ap, int *res, t_print f)
     }
     else
     {
-        f.nbr = va_arg(*ap, unsigned int);
+        if (f.lon)
+        {
+            f.lon = va_arg(*ap, unsigned long int);
+            conver_unsi_e(c, res, f, f.lon);
+        }
+
+        else if (f.lon_long)
+        {
+            f.lon_long = va_arg(*ap, unsigned long long int);
+            conver_unsi_e(c, res, f, f.lon_long);
+        }
+        else
+        {
+            f.uns_nbr = va_arg(*ap, unsigned int);
+            conver_unsi_e(c, res, f, f.uns_nbr);
+        }
+    }
+}
+
+void    conver_unsi_e(char c, int *res, t_print f, size_t nbr)
+{
         if (c == 'o')
-            *res += itos(8, f, f.nbr);
+            *res += itos(8, f, nbr);
         if (c == 'u')
-            *res += itos(10, f, f.nbr);
+            *res += itos(10, f, nbr);
         if (c == 'X')
-            *res += itos(16, f, f.nbr);
+            *res += itos(16, f, nbr);
         if (c == 'x')
         {
             f.min = 1;
-            *res += itos(16, f, f.nbr);
+            *res += itos(16, f, nbr);
         }
-    }
 }
 
 void     entier(char c, va_list *ap, int *res, t_print f)
